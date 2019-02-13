@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>teclas</title>
+        
+    </head>
+    <body onkeypress="teclas(event)">
+        
+        <textarea id="txt" class="txt"></textarea>
+        <p id="p"></p>
+                <a download="index.html" id="downloadlink" style="display: none">Download</a>
+        
+        <script type="text/javascript" charset="utf-8">
+            var txt = document.getElementById("txt");
+            var p = document.getElementById("p");
+            var nombre = "el caracter de la teclas es: ";
+            var numero = "el codigo de la tecla es: ";
+            
+            function teclas(e){
+                var tecla = e.which;
+                numero +=" "+tecla;
+                p.innerHTML=numero;
+                if(tecla==13){
+                    nombre += txt.value;
+                    
+                    var textFile = null;
+                    var makeTextFile = function (text) {
+                        var data = new Blob([text], {type: 'text/plain'});
+            
+                        // If we are replacing a previously generated file we need to
+                        // manually revoke the object URL to avoid memory leaks.
+                        if(textFile !== null) {
+                            window.URL.revokeObjectURL(textFile);
+                        }
+                        textFile = window.URL.createObjectURL(data);
+                        return textFile;
+                    };
+            
+            
+              
+                var txs =  nombre+" ::::::::::: "+numero;
+              
+                var link = document.getElementById('downloadlink');
+                link.href = makeTextFile(txs);
+                link.style.display = 'block';
+             
+        
+                }
+                
+            }
+        </script>
+        
+        
+    </body>
+</html>
